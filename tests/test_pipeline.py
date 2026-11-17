@@ -161,6 +161,18 @@ def test_limit_holds_the_command_and_resumes_after_reset(org):
     assert limit_ends("no time here", noon) == noon + 1800
 
 
+@pytest.mark.parametrize("msg,hour", [
+    ("resets 4pm (UTC)", 16), ("resets 4pm (GMT)", 16),
+    ("resets at 9:30pm (UTC+5:30)", 16), ("resets 11am (GMT-05:00)", 16),
+])
+def test_limit_reset_zone_does_not_depend_on_local_time(msg, hour):
+    from datetime import datetime, timezone
+    from agentsorg.budget import limit_ends
+    noon = datetime(2026, 10, 31, 13, 50, tzinfo=timezone.utc).timestamp()
+    at = datetime.fromtimestamp(limit_ends(msg, noon) - 60, timezone.utc)
+    assert (at.hour, at.minute) == (hour, 0)
+
+
 def test_running_task_that_hits_a_limit_resumes(org):
     n = {"c": 0}
     import agentsorg.agents as am

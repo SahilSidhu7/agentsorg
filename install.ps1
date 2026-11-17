@@ -3,7 +3,7 @@
 # or from a local checkout:  .\install.ps1
 # Upgrading from 0.7: run it again. Your companies, clients and history are kept.
 $ErrorActionPreference = "Stop"
-$version = "0.8.3"
+$version = "0.8.4"
 $src = if ($env:AGENTSORG_SRC) { $env:AGENTSORG_SRC } `
        elseif ($PSScriptRoot -and (Test-Path "$PSScriptRoot\pyproject.toml")) { $PSScriptRoot } `
        else { "https://agentsorg.sahilsidhu.pro/agentsorg-$version-py3-none-any.whl" }

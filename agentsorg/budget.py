@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from .quota import Quota
@@ -20,16 +20,32 @@ def is_limit(error: str | None) -> bool:
     return bool(LIMIT_RE.search(error or ""))
 
 
+def _zone(name: str | None):
+    """The time zone named in a reset message, or None for local time.
+    UTC/GMT and fixed offsets ("UTC+2", "GMT-05:30") never need the tz database,
+    which Windows lacks unless the tzdata package is installed."""
+    name = (name or "").strip()
+    if not name:
+        return None
+    m = re.fullmatch(r"(?:UTC|GMT|Z)(?:\s*([+-])(\d{1,2})(?::?(\d{2}))?)?", name, re.I)
+    if m:
+        if not m.group(1):
+            return timezone.utc
+        off = timedelta(hours=int(m.group(2)), minutes=int(m.group(3) or 0))
+        return timezone(off if m.group(1) == "+" else -off)
+    try:
+        return ZoneInfo(name)
+    except Exception:
+        return None
+
+
 def limit_ends(error: str, now: float | None = None) -> float:
     """When the limit lifts, from messages like `resets 4pm (UTC)`."""
     now = now or time.time()
     m = RESET_RE.search(error or "")
     if not m:
         return now + LIMIT_WAIT
-    try:
-        tz = ZoneInfo(m.group(4)) if m.group(4) else None
-    except Exception:
-        tz = None
+    tz = _zone(m.group(4))
     cur = datetime.fromtimestamp(now, tz)
     h, ampm = int(m.group(1)), (m.group(3) or "").lower()
     if ampm:

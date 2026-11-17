@@ -4,7 +4,7 @@
 # or from a local checkout:  ./install.sh
 # Upgrading from 0.7: run it again. Your companies, clients and history are kept.
 set -e
-VERSION="0.8.3"
+VERSION="0.8.4"
 SRC="${AGENTSORG_SRC:-https://agentsorg.sahilsidhu.pro/agentsorg-$VERSION-py3-none-any.whl}"
 case "$0" in */install.sh) [ -z "$AGENTSORG_SRC" ] && [ -f "$(dirname "$0")/pyproject.toml" ] && SRC="$(cd "$(dirname "$0")" && pwd)";; esac
 

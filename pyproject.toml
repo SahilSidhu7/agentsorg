@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentsorg"
-version = "0.8.3"
+version = "0.8.4"
 description = "A token-efficient virtual company of Claude agents running on your Claude Code subscription."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -14,6 +14,7 @@ dependencies = [
     "uvicorn>=0.27",
     "pyyaml>=6.0",
     "httpx>=0.27",
+    "tzdata; sys_platform == 'win32'",
 ]
 
 [project.optional-dependencies]
