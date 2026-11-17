@@ -863,6 +863,29 @@ def cmd_service(args):
         print(service.status(name))
 
 
+def cmd_update(args):
+    from . import update
+    r = update.check()
+    if r.get("error"):
+        print(r["error"])
+        return 1
+    if not r["newer"]:
+        print(f"agents.org {r['current']} is the latest version.")
+        return 0
+    print(f"agents.org {r['latest']} is out (you have {r['current']}).")
+    if args.check:
+        print("Run `agentsorg update` to install it. Your companies, clients and history are kept.")
+        return 0
+    rc = update.run_here()
+    if rc == -1:
+        print("The installer opened in a new window. Running company services restart by themselves;\n"
+              "if you started one with `agentsorg start`, start it again when the installer is done.")
+        return 0
+    if rc == 0:
+        print("If you started a company with `agentsorg start` (not as a service), start it again to use the new version.")
+    return rc
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="agentsorg", description="Token-efficient virtual company on Claude Code.")
     p.add_argument("--home", help="company folder (default: the company folder you're in, else the default company)")
@@ -923,6 +946,9 @@ def main(argv=None):
     s = sub.add_parser("service", help="run as a background service (systemd / launchd / Windows Task Scheduler)")
     s.add_argument("action", choices=["install", "uninstall", "status", "restart", "logs", "show"], nargs="?", default="status")
     s.add_argument("--port", type=int); s.add_argument("--host", default="127.0.0.1"); s.set_defaults(f=cmd_service)
+    s = sub.add_parser("update", help="install the newest agents.org (keeps your companies and history)")
+    s.add_argument("--check", action="store_true", help="only say whether a newer version is out")
+    s.set_defaults(f=cmd_update)
     s = sub.add_parser("info", help="where the company lives, its port and whether it is running")
     s.add_argument("--json", action="store_true"); s.set_defaults(f=cmd_info)
     s = sub.add_parser("ask", help="ask about your company: prices, a client, what to reply (no work started, nothing sent)")
@@ -987,7 +1013,9 @@ def main(argv=None):
             sys.stdout.reconfigure(encoding="utf-8")
         except Exception:
             pass
-    args.f(args)
+    rc = args.f(args)
+    if type(rc) is int and rc:  # commands that report failure as an exit code (e.g. update)
+        sys.exit(rc)
 
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ cd ~/my-company && agentsorg start       # opens the dashboard: describe your st
 agentsorg service install                # optional: keep it running in the background
 ```
 
-Running the installer again upgrades in place and restarts a running company service.
+**Updating.** Run `agentsorg update` (or press **Check for updates** on Company → Settings). It installs the newest version in place and restarts running company services; your companies, clients and history are kept. `agentsorg update --check` only tells you whether a newer version is out. Nothing is checked in the background: the site is asked only when you run it. Running the installer again does the same thing.
 
 You can also use the one-line installers `install.ps1` (Windows) and `install.sh` (macOS/Linux). The only requirements are Python 3.11+ and Claude Code logged in (run `claude` once, then `/login`).
 
@@ -161,6 +161,7 @@ agentsorg files list | status <name> | commands <name> | remove <name>
 |---|---|
 | `agentsorg init <dir> [--project <folder>]` | Creates a company (around an existing project, read once into a context pack) |
 | `agentsorg start` / `agentsorg service install` | Dashboard in the foreground / as a background service |
+| `agentsorg update [--check]` | Installs the newest version (keeps your data), or only checks |
 | `agentsorg design "..."` | Redesigns the teams for a description of your needs |
 | `agentsorg ceo "find 20 clinics in Leeds"` | One command: routed for free when it can, otherwise one planning call, at most 3 steps |
 | `agentsorg ceo "@marketing 3 taglines"` | Straight to one team, 0 routing tokens |

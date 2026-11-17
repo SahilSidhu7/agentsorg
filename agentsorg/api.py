@@ -163,6 +163,7 @@ def create_app(org, heartbeat=None) -> FastAPI:
         return {
             "company": org.c.name,
             "about": org.c.about,
+            "version": __import__("agentsorg").__version__,
             "designed": bool(org.s.get("designed", False)) or bool(org.s.one("SELECT 1 x FROM tasks LIMIT 1")),
             "models": org.c.models,
             "depts": [{"id": d.id, "name": d.name, "mission": d.mission, "tools": d.tools, "functions": d.functions,
@@ -279,6 +280,24 @@ def create_app(org, heartbeat=None) -> FastAPI:
                 "max_chain_depth": ("int", (0, 4)), "backlog_cap": ("int", (1, 200)), "keep_days": ("int", (14, 3650)),
                 "task_timeout": ("int", (60, 3600)), "auto_max_percent": ("int", (0, 90)),
                 "manual_max_percent": ("int", (10, 100)), "quiet_hours": ("list", None)}
+
+    @app.get("/api/update", dependencies=A)
+    def update_check():
+        from . import update
+        return update.check()                    # only when you press "Check for updates"
+
+    @app.post("/api/update", dependencies=A)
+    def update_install():
+        from . import service, update
+        r = update.check()
+        if r.get("error") or not r["newer"]:
+            return {**r, "started": False}
+        msg = update.start_detached(org.home / "data" / "update.log")
+        if service.is_installed(org.c.slug):
+            msg += " Your company restarts on the new version by itself; reload this page in a minute."
+        else:
+            msg += " When it's done, stop `agentsorg start` and start it again to use the new version."
+        return {**r, "started": True, "message": msg}   # the owner-API log already records this call
 
     @app.get("/api/company/settings", dependencies=A)
     def company_settings():

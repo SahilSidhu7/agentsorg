@@ -2,9 +2,9 @@
 # agents.org installer (macOS / Linux)
 #   curl -fsSL https://agentsorg.sahilsidhu.pro/install.sh | sh
 # or from a local checkout:  ./install.sh
-# Upgrading from 0.7: run it again. Your companies, clients and history are kept.
+# Upgrading: run it again, or `agentsorg update`. Your companies, clients and history are kept.
 set -e
-VERSION="0.8.4"
+VERSION="0.8.5"
 SRC="${AGENTSORG_SRC:-https://agentsorg.sahilsidhu.pro/agentsorg-$VERSION-py3-none-any.whl}"
 case "$0" in */install.sh) [ -z "$AGENTSORG_SRC" ] && [ -f "$(dirname "$0")/pyproject.toml" ] && SRC="$(cd "$(dirname "$0")" && pwd)";; esac
 
@@ -32,6 +32,15 @@ case ":$PATH:" in *":$BIN:"*) ;; *) echo "note: add $BIN to your PATH:  echo 'ex
 # a running company picks up the new version
 if command -v systemctl >/dev/null 2>&1 && systemctl --user list-units 'agentsorg*' --no-legend 2>/dev/null | grep -q agentsorg; then
   systemctl --user restart 'agentsorg*' 2>/dev/null && echo "Restarted your running company service(s)."
+fi
+if [ "$(uname)" = Darwin ]; then
+  RESTARTED=
+  for p in "$HOME"/Library/LaunchAgents/org.agentsorg*.plist; do
+    [ -f "$p" ] || continue
+    launchctl unload "$p" 2>/dev/null || true
+    launchctl load -w "$p" 2>/dev/null && RESTARTED=1 || true
+  done
+  if [ -n "$RESTARTED" ]; then echo "Restarted your running company service(s)."; fi
 fi
 
 echo

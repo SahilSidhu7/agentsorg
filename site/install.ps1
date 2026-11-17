@@ -1,9 +1,9 @@
 # agents.org installer (Windows)
 #   irm https://agentsorg.sahilsidhu.pro/install.ps1 | iex
 # or from a local checkout:  .\install.ps1
-# Upgrading from 0.7: run it again. Your companies, clients and history are kept.
+# Upgrading: run it again, or `agentsorg update`. Your companies, clients and history are kept.
 $ErrorActionPreference = "Stop"
-$version = "0.8.4"
+$version = "0.8.5"
 $src = if ($env:AGENTSORG_SRC) { $env:AGENTSORG_SRC } `
        elseif ($PSScriptRoot -and (Test-Path "$PSScriptRoot\pyproject.toml")) { $PSScriptRoot } `
        else { "https://agentsorg.sahilsidhu.pro/agentsorg-$version-py3-none-any.whl" }
@@ -32,6 +32,14 @@ if (Get-Command pipx -ErrorAction SilentlyContinue) {
     Write-Host "Added $bin to your PATH (open a new terminal to use it everywhere)."
   }
 }
+
+# a running company picks up the new version
+$running = @(Get-ScheduledTask -TaskName "agentsorg*" -ErrorAction SilentlyContinue | Where-Object { $_.State -eq "Running" })
+foreach ($t in $running) {
+  Stop-ScheduledTask -TaskName $t.TaskName -ErrorAction SilentlyContinue
+  Start-ScheduledTask -TaskName $t.TaskName -ErrorAction SilentlyContinue
+}
+if ($running.Count) { Write-Host "Restarted your running company service(s)." }
 
 Write-Host "`nInstalled agents.org $version." -ForegroundColor Green
 if (-not $hasClaude) {

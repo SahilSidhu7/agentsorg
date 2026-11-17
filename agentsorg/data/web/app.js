@@ -277,7 +277,10 @@ const V = {
       </div><div class="row"><button id="csSave">Save settings</button><span class="hint" id="csErr"></span></div></div>
       <div class="card" style="margin-top:14px"><b>Project context</b>
         <p class="hint">${ctx.exists ? `Read ${ctx.built ? ago(ctx.built) + " ago" : ""} from ${esc(ctx.folders.join(", "))}. Every agent starts from this instead of exploring your project.` : "Link your project folder on Files &amp; project, then read it once so agents start informed."}</p>
-        <div class="row"><button class="ghost sm" id="ctxBuild">${ctx.exists ? "Read the project again" : "Read the project now"}</button>${ctx.exists ? `<button class="ghost sm" id="ctxShow">Show what agents see</button>` : ""}</div></div>`;
+        <div class="row"><button class="ghost sm" id="ctxBuild">${ctx.exists ? "Read the project again" : "Read the project now"}</button>${ctx.exists ? `<button class="ghost sm" id="ctxShow">Show what agents see</button>` : ""}</div></div>
+      <div class="card" style="margin-top:14px"><b>Updates</b>
+        <p class="hint" id="upMsg">You have agents.org ${esc(S.version || "")}. Nothing is checked unless you press the button.</p>
+        <div class="row"><button class="ghost sm" id="upCheck">Check for updates</button><button class="sm hide" id="upGo">Update now</button></div></div>`;
   },
   async newdept() {
     return `<p><a data-view="teams">← Teams</a></p><h1>New team</h1><p class="sub">Starts with one person on the cheapest model and no web or shell access; add people and abilities on its page.</p>
@@ -760,6 +763,17 @@ document.addEventListener("click", async (e) => {
     body.quiet_hours = val("quiet_hours").split(",").map((x) => x.trim()).filter(Boolean);
     try { await api("/api/company/settings", { method: "PUT", body }); banner("Settings saved."); return render(); }
     catch (err) { $("#csErr").textContent = errText(err); return; }
+  }
+  if (id === "upCheck" || id === "upGo") {
+    el.disabled = true; el.textContent = id === "upGo" ? "Starting the installer…" : "Checking…";
+    let r;
+    try { r = await api("/api/update", id === "upGo" ? { method: "POST" } : {}); } catch (err) { r = { error: errText(err) }; }
+    el.disabled = false; el.textContent = id === "upGo" ? "Update now" : "Check again";
+    const msg = r.error || r.message || (r.newer ? `agents.org ${r.latest} is out (you have ${r.current}). Your companies, clients and history are kept.`
+                                                 : `You have the latest version (${r.current}).`);
+    $("#upMsg").textContent = msg;
+    $("#upGo").classList.toggle("hide", !(r.newer && !r.started));
+    return;
   }
   if (id === "ctxBuild") {
     el.disabled = true; el.textContent = "Reading your project (one call)…";
