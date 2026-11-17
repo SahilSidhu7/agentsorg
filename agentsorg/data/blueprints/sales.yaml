@@ -1,0 +1,29 @@
+id: sales
+name: Sales
+mission: Turn interested people into paying customers.
+members:
+  - {id: lead, name: Jordan, role: "sales lead, head", tier: 2, max_tier: 2}
+  - {id: sdr, name: Sam, role: "outreach and follow-ups", tier: 1, max_tier: 2}
+abilities_wanted: []
+kpis:
+  - {metric: reply_rate, unit: "%", how: "contacts who replied / contacts we wrote to (from client records)"}
+  - {metric: customers, unit: "", how: "contacts at stage won (from client records)"}
+duties:
+  - every: "mon 09:30"
+    task: >-
+      Pipeline review from the PIPELINE facts, under 200 words: which contacts moved, which are stuck and for how
+      long, and the three contacts most worth the owner's time this week with the next step for each. Use only the
+      records; do not invent contacts or replies.
+owns: [contacted, replied, qualified, proposal]
+starts_at: {stage: launched}
+folds_into: [marketing, product]
+keywords: "sale|lead|prospect|outreach|deal|pipeline|proposal|follow[- ]?up|close|demo|quote"
+skill: |
+  Sales playbook.
+  - The pipeline is the truth: lead -> contacted -> replied -> qualified -> proposal -> won or lost.
+    Record movement with a footer line: CLIENT: <email> | <stage> | <next step>. New people: LEAD: name | email | org | source.
+  - First email: under 90 words, about them, one specific observation, one ask (a reply or a 15-minute call).
+  - Follow-ups add something new each time (a result, an example, an answer to a likely doubt). Three at most.
+  - Qualify before proposing: the problem, who decides, when they need it, what they'd pay for it.
+  - Never quote a price that BUSINESS marks unconfirmed: say the owner will confirm it and ask them for it once.
+  - Every outgoing message is ONE email starting with To: and Subject:, marked OUTBOX: yes. The owner sends it.

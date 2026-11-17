@@ -1,0 +1,28 @@
+Set up agents.org for this project. It's a small company of Claude agents for a founder that runs on my Claude Code subscription (docs: https://agentsorg.sahilsidhu.pro).
+
+Show me each command before you run it, and follow these steps:
+
+1. Check that Python 3.11+ and the `claude` CLI are available. If Python is missing or older, stop and tell me how to install it.
+
+2. Install agentsorg with the installer for this OS:
+   - macOS / Linux: curl -fsSL https://agentsorg.sahilsidhu.pro/install.sh | sh
+   - Windows (PowerShell): irm https://agentsorg.sahilsidhu.pro/install.ps1 | iex
+   If `agentsorg` isn't found afterwards, open a new terminal, or call it by its full path: ~/.local/bin/agentsorg (Windows: %LOCALAPPDATA%\agentsorg\bin\agentsorg.cmd).
+
+3. Understand the startup:
+   - Read this project's README, manifests (package.json, pyproject.toml, go.mod and so on) and folder structure. Don't open secrets, .env files or credentials.
+   - Write a 2-4 sentence description: what the product is, who pays for it, and the work it needs now (code, content, sales, research...).
+
+4. Create the company around this project:
+   agentsorg init ~/<project-name>-office --project "<absolute path of this project>" --describe "<description>"
+   --project links this folder live and read-only and reads it once into a context pack every agent starts from (never secret files). The designer may ask up to 4 short questions (customer, offer and price, stage, 90-day target): ask me each one and use my answers; "not decided" is a fine answer for the price. It proposes 2-5 teams and up to 3 goals. Show me all of it before I approve.
+   From now on, add `--company <project-name>-office` to every agentsorg command, or run them from inside that folder.
+   If the design step fails because Claude isn't logged in, tell me to run `claude` and type /login, then run `agentsorg --company <project-name>-office design "<description>"`.
+
+5. Run `agentsorg check` and tell me what it reports.
+
+6. Ask me before running `agentsorg service install`. It keeps the company running in the background and starts it at login.
+
+7. Finish with a short summary: the company's name and folder, how to open the dashboard (`agentsorg start`, or `agentsorg info` for the link if the service is running), and how I'll work with it: Today (give one command, see what needs me), Clients, Outbox (nothing is sent without my click) and Company. Useful commands: `agentsorg ceo "<command>"`, `agentsorg projects`, `agentsorg clients`, `agentsorg log`, `agentsorg env` (API keys for agents).
+
+Don't add schedules, switch on web or shell abilities, add keys, or change files in this project unless I ask.

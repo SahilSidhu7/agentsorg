@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agents.org</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/office.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="dot"></span><span id="company">agents.org</span></div>
+    <nav id="nav">
+      <a data-view="today" class="on">Today <span id="ibcount" class="pill hide"></span></a>
+      <a data-view="clients">Clients</a>
+      <a data-view="outbox">Outbox <span id="obcount" class="pill hide"></span></a>
+      <a data-view="company">Company</a>
+    </nav>
+    <div class="sidefoot" id="hb">heartbeat: –</div>
+  </aside>
+
+  <main>
+    <header class="top">
+      <div class="meters" id="meters"></div>
+      <div class="topctl">
+        <button id="pauseB" class="ghost">Pause all</button>
+      </div>
+    </header>
+    <div id="banner" class="banner hide"></div>
+    <section id="view"></section>
+  </main>
+</div>
+
+<div id="modal" class="modal hide"><div class="mbox"><button class="x" id="mclose">×</button><div id="mbody"></div></div></div>
+<aside id="drawer" class="drawer" aria-label="Details"><button class="x" id="drclose">×</button><div id="drbody"></div></aside>
+<button class="askbtn" id="askOpen" title="Ask about your company: prices, clients, what to reply">Ask</button>
+<section class="askp hide" id="askP" aria-label="Ask about your company">
+  <div class="askh"><b>Ask about your company</b><button class="ghost sm x" id="askClose" aria-label="Close">×</button></div>
+  <div class="asklog" id="askLog"></div>
+  <div class="askin"><textarea id="askT" placeholder="e.g. What should I reply to Rito? · What do we charge?"></textarea><button id="askGo">Ask</button></div>
+</section>
+<script src="/static/md.js"></script>
+<script src="/static/office.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

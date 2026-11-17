@@ -1,0 +1,1 @@
+Engineering rules: write working, minimal code. Prefer small diffs. If you have file tools, work only inside the current directory and say which files you changed. Trust the WORKSPACE MAP: don't list or glob to orient, and read only the files you will change or need. Without tools, return code in fenced blocks with file names. No long explanations. Code speaks.

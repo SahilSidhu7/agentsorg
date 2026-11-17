@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agents.org: your Claude subscription, fully staffed</title>
+<meta name="description" content="Describe your startup and Claude designs the teams it needs. Give one command, get one result to accept. Keeps your clients, drafts the emails you send, and runs on your Claude Code subscription. Free for Windows, macOS and Linux.">
+<link rel="canonical" href="https://agentsorg.sahilsidhu.pro/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentsorg.sahilsidhu.pro/">
+<meta property="og:title" content="agents.org: your Claude subscription, fully staffed">
+<meta property="og:description" content="Describe your startup. Get a company of Claude agents. One command, one result to accept. Runs on your Claude Code subscription.">
+<meta property="og:image" content="https://agentsorg.sahilsidhu.pro/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1B2B3C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 17' shape-rendering='crispEdges'%3E%3Crect x='3' y='2' width='12' height='10' fill='%23d97757'/%3E%3Crect x='1' y='6' width='2' height='3' fill='%23d97757'/%3E%3Crect x='15' y='6' width='2' height='3' fill='%23d97757'/%3E%3Crect x='6' y='5' width='1.6' height='2.4' fill='%231d1b18'/%3E%3Crect x='10.4' y='5' width='1.6' height='2.4' fill='%231d1b18'/%3E%3Crect x='4' y='12' width='1.5' height='3.5' fill='%23d97757'/%3E%3Crect x='7' y='12' width='1.5' height='3.5' fill='%23d97757'/%3E%3Crect x='9.5' y='12' width='1.5' height='3.5' fill='%23d97757'/%3E%3Crect x='12.5' y='12' width='1.5' height='3.5' fill='%23d97757'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #EDF1EE; --paper-2: #E2E8E4; --ink: #1B2B3C; --ink-2: #4A5A68; --line: #BFCBC6; --lamp: #F2C14E;
+  --clay: #D97757; --clay-d: #B4593B; --ok: #2E7D5B; --code-bg: #1B2B3C; --code-ink: #E7EEF0;
+  --display: "Bricolage Grotesque", "Arial Narrow", sans-serif; --body: "Instrument Sans", system-ui, sans-serif;
+  --pixel: "Silkscreen", monospace; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #12263B; --paper-2: #0F2033; --ink: #E3ECF2; --ink-2: #9FB2C2; --line: #2F4A63; --code-bg: #0B1A2A; --ok: #6CC79E;
+  }
+}
+:root[data-theme="dark"] { --paper: #12263B; --paper-2: #0F2033; --ink: #E3ECF2; --ink-2: #9FB2C2; --line: #2F4A63; --code-bg: #0B1A2A; --ok: #6CC79E; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--body); -webkit-font-smoothing: antialiased;
+  background-image: linear-gradient(var(--paper-2) 1px, transparent 1px), linear-gradient(90deg, var(--paper-2) 1px, transparent 1px);
+  background-size: 32px 32px; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--lamp); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+nav.top { display: flex; align-items: center; gap: 24px; padding: 22px 0; }
+.logo { display: flex; align-items: center; gap: 10px; font: 800 20px var(--display); text-decoration: none; letter-spacing: -.01em; }
+.logo svg { width: 28px; height: 27px; }
+nav.top .links { margin-left: auto; display: flex; gap: 22px; font-size: 15px; }
+nav.top .links a { text-decoration: none; color: var(--ink-2); }
+nav.top .links a:hover { color: var(--ink); }
+
+/* hero */
+.hero { padding: 36px 0 28px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; }
+h1 { font: 800 clamp(44px, 6.4vw, 84px)/.95 var(--display); letter-spacing: -.035em; margin: 0 0 22px; }
+.lede { font-size: 19px; color: var(--ink-2); max-width: 34em; margin: 0 0 28px; }
+.cmd { display: flex; align-items: center; gap: 10px; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 14px 14px 18px;
+  font: 14px var(--mono); max-width: 100%; }
+.cmd code { overflow-x: auto; white-space: nowrap; flex: 1; scrollbar-width: none; }
+.cmd code::-webkit-scrollbar { display: none; }
+.cmd button { font: 600 13px var(--body); background: var(--lamp); color: #1B2B3C; border: 0; border-radius: 6px; padding: 7px 12px; cursor: pointer; flex: none; }
+.hero .small { font-size: 14px; color: var(--ink-2); margin-top: 12px; }
+
+/* floor plan */
+.plan { position: relative; aspect-ratio: 7 / 5; border: 4px solid var(--ink); background: var(--paper); border-radius: 2px; }
+.room { position: absolute; border: 3px solid var(--ink); }
+.room .lbl { position: absolute; left: 8px; top: 6px; font: 11px var(--pixel); color: var(--ink); }
+.room .dim { position: absolute; right: 8px; top: 7px; font: 9px var(--pixel); color: var(--ink-2); }
+.door { position: absolute; background: var(--paper); }
+.door::after { content: ""; position: absolute; border: 1.5px dashed var(--line); border-radius: 0 100% 0 0; }
+.desk { position: absolute; width: 13%; height: 7%; border: 2px solid var(--ink-2); background: var(--paper-2); transform: translateX(-50%); z-index: 3; }
+.desk::after { content: ""; position: absolute; right: 12%; top: -55%; width: 26%; height: 55%; background: var(--ink-2); }
+.desk.on::after { background: var(--lamp); box-shadow: 0 0 10px 2px var(--lamp); }
+.av { position: absolute; width: 6.2%; aspect-ratio: 18 / 17; transform: translate(-50%, -100%); z-index: 2; }
+.av svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.av.walk svg { animation: bob .34s infinite; }
+.av.walk .lg { animation: leg .34s infinite; } .av.walk .lg.b { animation-delay: .17s; }
+.av.work .arm { animation: type .22s infinite; }
+@keyframes bob { 50% { translate: 0 -1.5px; } } @keyframes leg { 50% { transform: translateY(-1.4px); } } @keyframes type { 50% { transform: translateY(1.2px); } }
+.av.flip svg { transform: scaleX(-1); }
+.bd { fill: var(--clay); } .sh { fill: var(--clay-d); } .eye { fill: #1d1b18; }
+.bub { position: absolute; z-index: 5; transform: translate(-50%, calc(-100% - 12px)); background: var(--paper); border: 2px solid var(--ink); border-radius: 8px;
+  padding: 2px 8px; font: 600 12px var(--body); white-space: nowrap; transition: opacity .3s; }
+.bub.ok { border-color: var(--ok); color: var(--ok); }
+.bub b { font: 10px var(--pixel); margin-right: 5px; }
+.memo { position: absolute; z-index: 6; font-size: 18px; transform: translate(-50%, -50%); transition: left 1s cubic-bezier(.5,0,.3,1), top 1s cubic-bezier(.5,0,.3,1); }
+.term { position: absolute; left: 3%; right: 3%; bottom: 3%; z-index: 7; background: var(--code-bg); color: var(--code-ink); border-radius: 6px; padding: 7px 11px;
+  font: 12px var(--mono); min-height: 2.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.term .p { color: var(--lamp); }
+.term .caret { display: inline-block; width: .55em; height: 1em; background: var(--code-ink); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.report { position: absolute; right: 3%; top: 4%; z-index: 8; width: 44%; background: var(--paper); border: 3px solid var(--ink); padding: 10px 12px; font-size: 12.5px;
+  line-height: 1.45; opacity: 0; transform: translateY(-6px); transition: opacity .4s, transform .4s; box-shadow: 6px 6px 0 var(--ink); }
+.report.show { opacity: 1; transform: none; }
+.report h4 { margin: 0 0 4px; font: 11px var(--pixel); }
+.report p { margin: 0; } .report .t { color: var(--ink-2); font-size: 11.5px; }
+
+/* sections */
+section { padding: 84px 0 0; }
+h2 { font: 800 clamp(32px, 4.2vw, 52px)/1.02 var(--display); letter-spacing: -.03em; margin: 0 0 16px; max-width: 18em; }
+.intro { color: var(--ink-2); max-width: 40em; margin: 0 0 36px; font-size: 18px; }
+
+/* flow: a real sequence */
+.flow { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 4px solid var(--ink); }
+.flow li { padding: 18px 20px 6px 0; position: relative; }
+.flow li + li { padding-left: 20px; border-left: 1px dashed var(--line); }
+.flow .n { font: 12px var(--pixel); color: var(--ink-2); }
+.flow h3 { font: 700 21px/1.2 var(--display); margin: 6px 0 8px; }
+.flow p { margin: 0; color: var(--ink-2); font-size: 15.5px; }
+.flow .tok { display: inline-block; margin-top: 10px; font: 13px var(--mono); background: var(--paper-2); padding: 2px 8px; border-radius: 4px; color: var(--ink); }
+.proof { margin-top: 26px; font-size: 15px; color: var(--ink-2); }
+
+/* elevator */
+.lift { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: start; }
+.shaft { border: 4px solid var(--ink); }
+.floor { display: grid; grid-template-columns: 76px 1fr; border-top: 3px solid var(--ink); min-height: 112px; }
+.floor:first-child { border-top: 0; }
+.floor .lv { border-right: 3px solid var(--ink); display: grid; place-items: center; font: 22px var(--pixel); }
+.floor .in { padding: 16px 20px; }
+.floor h3 { font: 700 22px var(--display); margin: 0 0 4px; }
+.floor p { margin: 0; color: var(--ink-2); font-size: 15.5px; }
+.floor.ph { background: repeating-linear-gradient(-45deg, transparent 0 10px, var(--paper-2) 10px 12px); }
+.floor.g .lv { background: var(--lamp); color: #1B2B3C; }
+.rules { margin: 0; padding: 0; list-style: none; }
+.rules li { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.rules b { display: block; font-weight: 600; }
+.rules span { color: var(--ink-2); font-size: 15.5px; }
+
+/* savings spec sheet */
+table.spec { width: 100%; border-collapse: collapse; border-top: 4px solid var(--ink); font-size: 16px; }
+.spec td { padding: 16px 16px 16px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.spec td:first-child { font-weight: 600; width: 30%; }
+.spec td:last-child { color: var(--ink-2); }
+
+/* budget clock-out */
+.budget { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.gauge { border: 4px solid var(--ink); padding: 26px; }
+.gauge .bar { height: 34px; border: 3px solid var(--ink); position: relative; background: var(--paper-2); }
+.gauge .fill { position: absolute; inset: 0 60% 0 0; background: var(--lamp); }
+.gauge .mark { position: absolute; left: 40%; top: -12px; bottom: -12px; width: 3px; background: var(--ink); }
+.gauge .mk2 { left: 90%; background: var(--ink-2); }
+.gauge .legend { display: flex; justify-content: space-between; margin-top: 18px; font-size: 14px; color: var(--ink-2); }
+.gauge .legend b { color: var(--ink); }
+
+/* ssh */
+.term-big { background: var(--code-bg); color: var(--code-ink); border-radius: 12px; padding: 22px 24px; font: 14.5px/1.75 var(--mono); overflow-x: auto; }
+.term-big .c { color: #8FA5B6; } .term-big .p { color: var(--lamp); } .term-big .g { color: #86D4A8; }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+
+/* designer */
+.designer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); border: 4px solid var(--ink); }
+.designer .ask { padding: 26px; border-right: 3px solid var(--ink); }
+.designer .ask q { font: 500 19px/1.5 var(--body); quotes: "“" "”"; }
+.designer .got { padding: 26px; }
+.designer .got h3 { font: 800 26px var(--display); margin: 0 0 4px; }
+.designer .got .why { color: var(--ink-2); font-size: 15px; margin: 0 0 18px; }
+.team { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+.team h4 { font: 11px var(--pixel); margin: 0 0 8px; }
+.person { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 15px; }
+.person svg { width: 26px; height: 25px; flex: none; }
+.person small { color: var(--ink-2); display: block; font-size: 13px; }
+.badge { margin-left: auto; font: 12px var(--mono); border: 1.5px solid var(--ink-2); border-radius: 20px; padding: 0 8px; white-space: nowrap; }
+
+/* setup prompt */
+.prompt { border: 4px solid var(--ink); background: var(--paper); box-shadow: 8px 8px 0 var(--ink); max-width: 900px; }
+.prompt-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 3px solid var(--ink); }
+.prompt-h > span:first-child { font: 12px var(--pixel); }
+.prompt-actions { display: flex; gap: 14px; align-items: center; font-size: 14px; }
+.prompt-actions button { font: 600 13px var(--body); background: var(--lamp); color: #1B2B3C; border: 2px solid var(--ink); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.prompt pre { margin: 0; padding: 18px 20px; font: 13.5px/1.65 var(--mono); white-space: pre-wrap; word-break: break-word; max-height: 460px; overflow: auto; }
+
+/* install */
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; display: grid; gap: 14px; max-width: 760px; }
+.steps li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+.steps li::before { counter-increment: s; content: counter(s); font: 18px var(--pixel); border: 3px solid var(--ink); width: 40px; height: 40px; display: grid; place-items: center; }
+.steps p { margin: 0 0 8px; }
+footer { margin-top: 110px; border-top: 4px solid var(--ink); padding: 26px 0 40px; display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); }
+footer .logo { font-size: 16px; color: var(--ink); }
+
+@media (max-width: 900px) {
+  .hero, .lift, .budget, .cols, .designer { grid-template-columns: 1fr; }
+  .designer .ask { border-right: 0; border-bottom: 3px solid var(--ink); }
+  .flow { grid-template-columns: 1fr 1fr; }
+  .flow li:nth-child(3) { padding-left: 0; border-left: 0; }
+  nav.top .links a:not(.gh) { display: none; }
+  .report { width: 60%; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .flow { grid-template-columns: 1fr; } .flow li + li { padding-left: 0; border-left: 0; border-top: 1px dashed var(--line); }
+  .team { grid-template-columns: 1fr; }
+  .room .dim { display: none; } .room .lbl { font-size: 8px; left: 4px; top: 3px; }
+  .bub { font-size: 10px; padding: 1px 5px; } .term { font-size: 10px; }
+  .report { width: 78%; font-size: 11px; }
+  .spec td:first-child { width: 42%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="top">
+    <a class="logo" href="#"><svg viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true"><rect class="bd" x="3" y="2" width="12" height="10"/><rect class="bd" x="1" y="6" width="2" height="3"/><rect class="bd" x="15" y="6" width="2" height="3"/><rect class="eye" x="6" y="5" width="1.6" height="2.4"/><rect class="eye" x="10.4" y="5" width="1.6" height="2.4"/><rect class="bd" x="4" y="12" width="1.5" height="3.5"/><rect class="bd" x="7" y="12" width="1.5" height="3.5"/><rect class="bd" x="9.5" y="12" width="1.5" height="3.5"/><rect class="bd" x="12.5" y="12" width="1.5" height="3.5"/></svg>agents.org</a>
+    <div class="links"><a href="#how">How it works</a><a href="#flow">Your startup</a><a href="#run">Clients</a><a href="#simple">Why it's small</a><a href="#ssh">Remote</a><a href="#setup">Setup prompt</a><a class="gh" href="#install">Install</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Your Claude subscription, fully staffed.</h1>
+      <p class="lede">Describe your startup and Claude designs the teams it needs. Give one command, and they do the work and bring you one result to accept. It keeps your clients, drafts the emails you send, and runs nothing you didn't ask for.</p>
+      <div class="cmd"><code id="one">curl -fsSL https://agentsorg.sahilsidhu.pro/install.sh | sh</code><button type="button" data-copy="one">Copy</button></div>
+      <p class="small">Runs on the Claude Code login you already have, with no API key. Windows, macOS and Linux. Or <a href="#setup">let Claude Code set it up for your project</a>.</p>
+      <a class="ph-badge" href="https://www.producthunt.com/posts/agents-org?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-agents-org" target="_blank" rel="noopener"><picture><source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1319784&amp;theme=dark"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1319784&amp;theme=light" alt="agents.org on Product Hunt" width="250" height="54" style="display:block;margin-top:18px;max-width:100%;height:auto"></picture></a>
+    </div>
+    <div class="plan" id="plan" role="img" aria-label="Animated floor plan: the CEO sends a command, Marketing and Research employees walk to their desks, work, and report back with token counts.">
+      <div class="room" style="left:0;top:0;width:34%;height:52%"><span class="lbl">ENGINEERING</span><span class="dim">4 STAFF</span></div>
+      <div class="room" style="left:34%;top:0;width:32%;height:52%"><span class="lbl">CEO CABIN</span><span class="dim">ROUTER · HAIKU</span></div>
+      <div class="room" style="left:66%;top:0;width:34%;height:52%"><span class="lbl">MARKETING</span><span class="dim">3 STAFF</span></div>
+      <div class="room" style="left:0;top:52%;width:50%;height:48%"><span class="lbl">RESEARCH</span><span class="dim">2 STAFF</span></div>
+      <div class="room" style="left:50%;top:52%;width:50%;height:48%"><span class="lbl">SALES &amp; SUPPORT</span><span class="dim">3 STAFF</span></div>
+      <div class="term" id="term"><span class="p">ceo›</span> <span id="typed"></span><span class="caret"></span></div>
+      <div class="report" id="report" aria-hidden="true"><h4>RESULT READY</h4>
+        <p>Marketing ✓ 3 headline options</p><p class="t">Haiku · 1,401 tokens</p>
+        <p>Research ✓ competitor note on Otter and Fireflies</p><p class="t">Haiku · 3,668 tokens</p></div>
+    </div>
+  </header>
+
+  <section id="how">
+    <h2>One command moves through the office like a memo.</h2>
+    <p class="intro">One thing at a time, finished. Each hop costs as little as possible, and most cost nothing.</p>
+    <ol class="flow">
+      <li><span class="n">STEP 1</span><h3>You give one command</h3><p>On the Today page. "@sales …" or a request one team clearly owns goes straight there.</p><span class="tok">0 tokens to route</span></li>
+      <li><span class="n">STEP 2</span><h3>It plans, small</h3><p>Anything bigger gets one planning call and at most three steps. It starts at once: no approval queue, no meetings.</p><span class="tok">one call</span></li>
+      <li><span class="n">STEP 3</span><h3>Teams do the work</h3><p>Each task runs on the cheapest model that fits, with your business brief and the few facts that matter. Ordinary choices they make themselves.</p><span class="tok">Haiku first</span></li>
+      <li><span class="n">STEP 4</span><h3>You get one result</h3><p>Accept it, redo it with a note, or discard it. Code changes wait on a branch and merge when you accept.</p><span class="tok">one click</span></li>
+    </ol>
+    <p class="proof">Measured on a real run: "launch plan for NoteFlow, with a headline and a competitor note" went to two departments and finished in 21 seconds for 6,808 tokens.</p>
+  </section>
+
+  <section id="models">
+    <div class="lift">
+      <div>
+        <h2>Every task starts on the ground floor.</h2>
+        <p class="intro">The router picks a model with plain rules, not another model call. Work only goes up a floor when it has to.</p>
+        <ul class="rules">
+          <li><b>Short, formulaic work stays on Haiku</b><span>Replies, summaries, headlines, lists and classification.</span></li>
+          <li><b>Real work goes to Sonnet</b><span>Code, long-form writing, analysis and plans.</span></li>
+          <li><b>Opus is opt-in</b><span>Only for a member allowed to use it, and only when a cheaper model answers "this needs a stronger model", or you add !opus.</span></li>
+        </ul>
+      </div>
+      <div class="shaft" aria-label="Model floors">
+        <div class="floor ph"><div class="lv">3</div><div class="in"><h3>Opus</h3><p>The penthouse. Reached only by escalation or by asking for it.</p></div></div>
+        <div class="floor"><div class="lv">2</div><div class="in"><h3>Sonnet</h3><p>Where engineers and writers do the heavy lifting.</p></div></div>
+        <div class="floor g"><div class="lv">G</div><div class="in"><h3>Haiku</h3><p>Routing, reports, support replies and most quick tasks.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where the tokens don't go.</h2>
+    <p class="intro">Most of an agent's bill is overhead it never needed. agents.org cuts it before the first word of the task.</p>
+    <table class="spec">
+      <tr><td>A tiny system prompt</td><td>Each call replaces Claude Code's large default prompt with a few lines about the employee's role. A test call costs about 600 tokens.</td></tr>
+      <tr><td>Less hidden thinking</td><td>Haiku spent about 70% of its output on thinking you never see. It now runs at low effort: output tokens fell 42% in our tests, and the answers stayed the same length.</td></tr>
+      <tr><td>A map, not a search</td><td>Departments that edit files get a map of their folder up front, so they don't spend turns listing and reading just to orient. A real coding task used 34% fewer new tokens.</td></tr>
+      <tr><td>No tools unless needed</td><td>Writers and analysts run text-only, with no tool schemas. Only Engineering gets file tools, fenced into its own folder.</td></tr>
+      <tr><td>Nothing of yours leaks in</td><td>Your CLAUDE.md, hooks, plugins, MCP servers and skills aren't loaded into agent calls.</td></tr>
+      <tr><td>Knowledge by retrieval</td><td>The shared knowledge base is searched per task and only the top three snippets go in, never the whole thing.</td></tr>
+      <tr><td>Answers you already paid for</td><td>The same task within 24 hours comes back from cache at zero tokens.</td></tr>
+      <tr><td>Idle is free</td><td>Nothing runs between your commands except schedules you made yourself. Walking around the office is just animation.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="budget">
+      <div>
+        <h2>Your plan stays yours.</h2>
+        <p class="intro">It reads your real subscription usage. Schedules you set up stop at 40%; your own commands run up to 90%. Work that hits a limit waits and starts by itself when usage frees up, and a pause button stops everything.</p>
+      </div>
+      <div class="gauge" role="img" aria-label="Usage bar: your schedules stop at 40 percent, your commands at 90 percent.">
+        <div class="bar"><div class="fill"></div><div class="mark"></div><div class="mark mk2"></div></div>
+        <div class="legend"><span><b>0–40%</b> your schedules</span><span><b>to 90%</b> your commands</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <h2>Describe your startup. Get the teams it needs.</h2>
+    <p class="intro">On day one you say what you're building, for whom, and where you are. One Sonnet call designs two to five teams for that business, and you approve them before anything changes.</p>
+    <div class="designer">
+      <div class="ask"><q>I'm a solo developer running a SaaS that turns podcasts into blog posts. I need help shipping small Python features, writing SEO posts and tweets, and answering support email.</q></div>
+      <div class="got">
+        <h3>PodScribe Ops</h3>
+        <p class="why">2 departments, 3 employees, designed with 1,706 tokens</p>
+        <div class="team">
+          <div><h4>ENGINEERING</h4>
+            <div class="person"><svg class="mini" data-head="1"></svg><span>Devon<small>Lead Python developer</small></span><span class="badge">Sonnet</span></div></div>
+          <div><h4>CONTENT &amp; SUPPORT</h4>
+            <div class="person"><svg class="mini" data-head="1"></svg><span>Wren<small>SEO and long-form writer</small></span><span class="badge">Sonnet</span></div>
+            <div class="person"><svg class="mini" data-scarf="#3b5bab"></svg><span>Sam<small>Tweets and support replies</small></span><span class="badge">Haiku</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="cols">
+      <div>
+        <h2>Point it at your project. Get a company.</h2>
+        <p class="intro">It reads your project once, including your CLAUDE.md rules, and every agent starts from that instead of exploring. Then you give commands and review results.</p>
+        <ul class="rules">
+          <li><b>It learns the project first</b><span>The file tree, CLAUDE.md and AGENTS.md rules, README, manifests, CI config and recent commits go into one context pack. Secret files are never opened. It re-reads only what changed, at most once a day.</span></li>
+          <li><b>Free routing, one plan</b><span>"@sales …" or a one-team request goes straight there for 0 tokens. Bigger work gets one planning call on Sonnet that knows your goals and past decisions.</span></li>
+          <li><b>One result per command</b><span>Teams hand work over by summary and file, and you get one combined result checked against what you asked. Accept merges any code; redo sends it back with your note.</span></li>
+          <li><b>Five things at most</b><span>"Needs you" holds results, drafts to send, questions and problems, five at a time. A result you never open closes after a week, so nothing piles up.</span></li>
+          <li><b>Asked once, never again</b><span>Teams decide ordinary things themselves. Only what's truly yours (a price, money, access, publishing) comes to you as one question, and your answer is kept for good.</span></li>
+          <li><b>Built to be left running</b><span>Nothing runs twice or gets stuck, errors never move up to pricier models, agents can't read your keys or credentials, files are written safely, and the database is backed up daily.</span></li>
+        </ul>
+      </div>
+      <pre class="term-big"><span class="p">$</span> agentsorg init ~/studio --project ~/code/app
+read 214 files · 2 CLAUDE.md · git log
+designed: 3 teams, 2 goals
+<span class="p">today›</span> Find 20 clinics in Leeds and draft a first email to each
+planned 2 steps · research → sales
+<span class="g">result ready</span> · 20 leads in Clients · 20 drafts in Outbox</pre>
+    </div>
+  </section>
+
+  <section id="run">
+    <div class="cols">
+      <div>
+        <h2>Win clients, not just tasks.</h2>
+        <p class="intro">The company keeps the record a founder needs: who you're talking to, what was said, what they paid. Agents add what they find; you decide what goes out.</p>
+        <ul class="rules">
+          <li><b>Clients</b><span>Lead, contacted, replied, qualified, proposal, won. Every email, note and payment on one page; reply rate, customers and revenue counted from it, not typed.</span></li>
+          <li><b>An outbox you control</b><span>Agents draft; you edit and click Send once you've added a mail key, or send it yourself and mark it sent. Nothing goes out on its own.</span></li>
+          <li><b>An activity log</b><span>What you asked, how it was understood, what each team delivered and what it cost. Nothing happens off the record.</span></li>
+          <li><b>Goals and your own schedules</b><span>Every agent works toward your goals. "Every Monday at 9, review the pipeline" runs only because you set it up.</span></li>
+          <li><b>Abilities per team</b><span>Switch on file editing, web research or a shell, one team at a time. Text-only teams stay the cheapest.</span></li>
+          <li><b>Keys and tokens</b><span>Give agents API keys without showing them the values. Keys stay on your machine, never enter a prompt, and are masked if an agent repeats one.</span></li>
+        </ul>
+      </div>
+      <pre class="term-big"><span class="p">$</span> agentsorg clients
+  lead 14 · contacted 19 · replied 1 · won 0
+  reply rate 5% · revenue this month 0
+<span class="p">$</span> agentsorg clients add rito@trippink.in
+<span class="g">✓ added</span> · next: WhatsApp to book a call
+<span class="p">$</span> agentsorg env set RESEND_API_KEY
+<span class="c"># value typed hidden, never shown again</span>
+<span class="p">$</span> agentsorg log --who agent --hours 24
+  sales #412 done · 20 drafts → Outbox · 6.1k tok</pre>
+    </div>
+  </section>
+
+  <section id="simple">
+    <div class="cols">
+      <div>
+        <h2>Small on purpose.</h2>
+        <p class="intro">An earlier version tried to run the company by itself: weekly plans, agents deciding for you, meetings, follow-ups. On a real startup it made noise and spent the plan. 0.8 keeps what a founder actually used.</p>
+        <ul class="rules">
+          <li><b>Nothing runs you didn't ask for</b><span>No background plans, no self-started follow-ups. Only your commands, and schedules you made.</span></li>
+          <li><b>Four places</b><span>Today, Clients, Outbox, Company. Everything else sits under Company.</span></li>
+          <li><b>Gate the irreversible, not the work</b><span>Sending, merging, keys and spending wait for your click. Planning and doing don't.</span></li>
+        </ul>
+      </div>
+      <pre class="term-big"><span class="c"># what 0.8 removed</span>
+  weekly self-made plans
+  research deciding for you
+  agent follow-ups and side questions
+  the conference room
+  plan approvals, proposed teams
+  inbound mail, reports, mods
+<span class="c"># what stayed</span>
+  <span class="g">one command → one result</span>
+  <span class="g">clients · outbox · activity log</span></pre>
+    </div>
+  </section>
+
+  <section id="ssh">
+    <div class="cols">
+      <div>
+        <h2>One office, any computer.</h2>
+        <p class="intro">Install it once on a server or home machine and keep it running as a service. From any laptop, one ssh command gives you a private tunnel to the dashboard. Nothing to install on the laptop, and no ports open to the internet.</p>
+      </div>
+      <pre class="term-big"><span class="c"># from any PC that has ssh</span>
+<span class="p">$</span> ssh -L 5556:127.0.0.1:5556 you@server
+<span class="p">server$</span> agentsorg info
+PodScribe Ops · port 5556 · running
+dashboard: http://127.0.0.1:5556/?token=…
+<span class="c"># open it on the laptop: Today, Clients, Outbox, Company</span></pre>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2>Or paste one prompt into Claude Code.</h2>
+    <p class="intro">Open Claude Code in your project and paste this. It installs agentsorg, reads your project, asks you the few questions the design needs, and asks before setting up anything that runs in the background. It shows you each command first, and it won't touch your files unless you say so.</p>
+    <div class="prompt">
+      <div class="prompt-h"><span>Setup prompt</span><span class="prompt-actions"><a href="/setup-prompt.txt">Plain text</a><button type="button" data-copy="setupPrompt">Copy prompt</button></span></div>
+      <pre id="setupPrompt">Set up agents.org for this project. It's a small company of Claude agents for a founder that runs on my Claude Code subscription (docs: https://agentsorg.sahilsidhu.pro).
+
+Show me each command before you run it, and follow these steps:
+
+1. Check that Python 3.11+ and the `claude` CLI are available. If Python is missing or older, stop and tell me how to install it.
+
+2. Install agentsorg with the installer for this OS:
+   - macOS / Linux: curl -fsSL https://agentsorg.sahilsidhu.pro/install.sh | sh
+   - Windows (PowerShell): irm https://agentsorg.sahilsidhu.pro/install.ps1 | iex
+   If `agentsorg` isn't found afterwards, open a new terminal, or call it by its full path: ~/.local/bin/agentsorg (Windows: %LOCALAPPDATA%\agentsorg\bin\agentsorg.cmd).
+
+3. Understand the startup:
+   - Read this project's README, manifests (package.json, pyproject.toml, go.mod and so on) and folder structure. Don't open secrets, .env files or credentials.
+   - Write a 2-4 sentence description: what the product is, who pays for it, and the work it needs now (code, content, sales, research...).
+
+4. Create the company around this project:
+   agentsorg init ~/&lt;project-name&gt;-office --project "&lt;absolute path of this project&gt;" --describe "&lt;description&gt;"
+   --project links this folder live and read-only and reads it once into a context pack every agent starts from (never secret files). The designer may ask up to 4 short questions (customer, offer and price, stage, 90-day target): ask me each one and use my answers; "not decided" is a fine answer for the price. It proposes 2-5 teams and up to 3 goals. Show me all of it before I approve.
+   From now on, add `--company &lt;project-name&gt;-office` to every agentsorg command, or run them from inside that folder.
+   If the design step fails because Claude isn't logged in, tell me to run `claude` and type /login, then run `agentsorg --company &lt;project-name&gt;-office design "&lt;description&gt;"`.
+
+5. Run `agentsorg check` and tell me what it reports.
+
+6. Ask me before running `agentsorg service install`. It keeps the company running in the background and starts it at login.
+
+7. Finish with a short summary: the company's name and folder, how to open the dashboard (`agentsorg start`, or `agentsorg info` for the link if the service is running), and how I'll work with it: Today (give one command, see what needs me), Clients, Outbox (nothing is sent without my click) and Company. Useful commands: `agentsorg ceo "&lt;command&gt;"`, `agentsorg projects`, `agentsorg clients`, `agentsorg log`, `agentsorg env` (API keys for agents).
+
+Don't add schedules, switch on web or shell abilities, add keys, or change files in this project unless I ask.</pre>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Set it up in three commands.</h2>
+    <p class="intro">You need Python 3.11+ and Claude Code, logged in once with <code>claude</code>.</p>
+    <ol class="steps">
+      <li><div><p>Install</p><div class="cmd"><code id="s1">curl -fsSL https://agentsorg.sahilsidhu.pro/install.sh | sh</code><button type="button" data-copy="s1">Copy</button></div>
+        <p style="margin-top:8px;font-size:14px;color:var(--ink-2)">On Windows: <code>irm https://agentsorg.sahilsidhu.pro/install.ps1 | iex</code></p></div></li>
+      <li><div><p>Create your company</p><div class="cmd"><code id="s2">agentsorg init ~/my-company</code><button type="button" data-copy="s2">Copy</button></div></div></li>
+      <li><div><p>Open it and describe your startup</p><div class="cmd"><code id="s3">cd ~/my-company &amp;&amp; agentsorg start</code><button type="button" data-copy="s3">Copy</button></div>
+        <p style="margin-top:8px;font-size:14px;color:var(--ink-2)">Keep it running in the background with <code>agentsorg service install</code>. Already on 0.7? Run the installer again: your companies, clients and history are kept.</p></div></li>
+    </ol>
+  </section>
+
+  <footer><span class="logo">agents.org</span><span>Runs on your own Claude Code subscription. Nothing is sent anywhere except Claude.</span><span>Built by Sahil Sidhu.</span></footer>
+</div>
+
+<script>
+// Avatar art shared by the plan and the team list.
+const SCARF = ["#2f6f5e", "#3b5bab", "#8a3fa0", "#b7791f", "#0e7490"];
+function svg(head, scarf) {
+  return `<svg viewBox="0 0 18 17" shape-rendering="crispEdges" aria-hidden="true">${head ? `<g fill="#e8b23a"><rect x="5" y="0" width="8" height="2"/><rect x="5" y="-1" width="1" height="1"/><rect x="8.5" y="-1.5" width="1" height="1.5"/><rect x="12" y="-1" width="1" height="1"/></g>` : ""}
+    <rect class="bd" x="3" y="2" width="12" height="10"/><rect class="sh" x="3" y="11" width="12" height="1"/>
+    <rect class="bd arm" x="1" y="6" width="2" height="3"/><rect class="bd arm" x="15" y="6" width="2" height="3"/>
+    <rect class="eye" x="6" y="5" width="1.6" height="2.4"/><rect class="eye" x="10.4" y="5" width="1.6" height="2.4"/>
+    <rect x="3" y="9.4" width="12" height="1.2" fill="${scarf}"/>
+    <rect class="bd lg a" x="4" y="12" width="1.5" height="3.5"/><rect class="bd lg b" x="7" y="12" width="1.5" height="3.5"/>
+    <rect class="bd lg a" x="9.5" y="12" width="1.5" height="3.5"/><rect class="bd lg b" x="12.5" y="12" width="1.5" height="3.5"/></svg>`;
+}
+document.querySelectorAll("svg.mini").forEach((s, i) => { s.outerHTML = svg(!!s.dataset.head, s.dataset.scarf || SCARF[i % SCARF.length]); });
+
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-copy]"); if (!b) return;
+  navigator.clipboard?.writeText(document.getElementById(b.dataset.copy).textContent).then(() => {
+    b.textContent = "Copied"; setTimeout(() => (b.textContent = "Copy"), 1600);
+  });
+});
+
+// ---------- the floor plan demo ----------
+(() => {
+  const plan = document.getElementById("plan");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // rooms in plan % coords: [x0, y0, x1, y1]
+  const R = { eng: [2, 30, 32, 50], ceo: [36, 12, 64, 50], mkt: [68, 30, 98, 50], res: [2, 74, 48, 86], sal: [52, 74, 98, 86] };
+  const people = [
+    ["eng", 1, 0], ["eng", 0, 1], ["eng", 0, 2], ["mkt", 1, 0], ["mkt", 0, 1], ["mkt", 0, 2],
+    ["res", 1, 0], ["res", 0, 1], ["sal", 1, 0], ["sal", 0, 1], ["sal", 0, 2],
+  ];
+  const desks = { mkt: [[76, 24], [90, 24]], res: [[14, 62], [32, 62]] };
+  Object.values(desks).flat().forEach(([x, y], i) => {
+    const d = document.createElement("div"); d.className = "desk"; d.dataset.i = i;
+    d.style.left = x + "%"; d.style.top = y + "%"; plan.appendChild(d);
+  });
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const A = people.map(([room, head, s]) => {
+    const [x0, y0, x1, y1] = R[room];
+    const el = document.createElement("div"); el.className = "av"; el.innerHTML = svg(!!head, SCARF[s]);
+    plan.appendChild(el);
+    const a = { el, room, x: rnd(x0, x1), y: rnd(y0, y1), tx: 0, ty: 0, wait: rnd(0, 2), job: null };
+    a.tx = a.x; a.ty = a.y; return a;
+  });
+  const ceo = document.createElement("div"); ceo.className = "av"; ceo.innerHTML = svg(true, "#1B2B3C");
+  ceo.style.left = "50%"; ceo.style.top = "40%"; ceo.style.width = "7.5%"; plan.appendChild(ceo);
+  const term = document.getElementById("typed"), report = document.getElementById("report");
+
+  function bubble(a, html, cls = "") {
+    if (a.bub) a.bub.remove(); a.bub = null; if (!html) return;
+    const b = document.createElement("div"); b.className = "bub " + cls; b.innerHTML = html; plan.appendChild(b); a.bub = b;
+  }
+  function place(a) {
+    a.el.style.left = a.x + "%"; a.el.style.top = a.y + "%";
+    if (a.bub) { a.bub.style.left = Math.min(88, Math.max(12, a.x)) + "%"; a.bub.style.top = (a.y - 9) + "%"; }
+  }
+  let last = 0;
+  function tick(t) {
+    const dt = Math.min(.05, (t - (last || t)) / 1000); last = t;
+    const W = plan.clientWidth, H = plan.clientHeight;
+    A.forEach((a) => {
+      const dx = (a.tx - a.x) / 100 * W, dy = (a.ty - a.y) / 100 * H, d = Math.hypot(dx, dy);
+      if (d > 1) {
+        const k = Math.min(1, 42 * dt / d); a.x += dx * k * 100 / W; a.y += dy * k * 100 / H;
+        a.el.classList.add("walk"); if (Math.abs(dx) > 1) a.el.classList.toggle("flip", dx < 0);
+      } else {
+        a.el.classList.remove("walk");
+        if (!a.job && (a.wait -= dt) <= 0) { const [x0, y0, x1, y1] = R[a.room]; a.wait = rnd(2, 6); a.tx = rnd(x0, x1); a.ty = rnd(y0, y1); }
+      }
+      place(a);
+    });
+    requestAnimationFrame(tick);
+  }
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function type(s) { term.textContent = ""; for (const c of s) { term.textContent += c; await sleep(38); } }
+  function memo(to) {
+    const m = document.createElement("div"); m.className = "memo"; m.textContent = "📨";
+    m.style.left = "50%"; m.style.top = "36%"; plan.appendChild(m);
+    requestAnimationFrame(() => requestAnimationFrame(() => { m.style.left = to.x + "%"; m.style.top = (to.y - 6) + "%"; }));
+    setTimeout(() => m.remove(), 1100);
+  }
+  const ceoBubble = { el: ceo, x: 50, y: 40, bub: null };
+  async function scene() {
+    const peggy = A[4], nate = A[7];
+    const jobs = [[peggy, desks.mkt[0], 0, "writing 3 headlines"], [nate, desks.res[1], 3, "competitor note"]];
+    while (true) {
+      report.classList.remove("show");
+      await sleep(1800);
+      await type("Launch plan for NoteFlow: a headline and a competitor note");
+      await sleep(500);
+      bubble(ceoBubble, "<b>H</b>routing · 1.7k tokens"); place(ceoBubble);
+      await sleep(1400);
+      bubble(ceoBubble, null);
+      jobs.forEach(([a]) => memo(a));
+      await sleep(1000);
+      jobs.forEach(([a, [x, y], di, label]) => {
+        a.job = true; a.tx = x - 3; a.ty = y + 6.5; bubble(a, `<b>H</b>${label}`);
+        setTimeout(() => { plan.querySelector(`.desk[data-i="${di}"]`).classList.add("on"); a.el.classList.add("work"); }, 1600);
+      });
+      await sleep(5200);
+      jobs.forEach(([a, , di]) => {
+        a.el.classList.remove("work"); plan.querySelector(`.desk[data-i="${di}"]`).classList.remove("on");
+        bubble(a, "✓ done", "ok");
+      });
+      await sleep(900);
+      report.classList.add("show");
+      term.textContent = "";
+      await sleep(4200);
+      jobs.forEach(([a]) => { a.job = null; a.wait = 0; bubble(a, null); });
+      await sleep(2600);
+    }
+  }
+  A.forEach(place);
+  if (reduce) { report.classList.add("show"); term.textContent = "Launch plan for NoteFlow: a headline and a competitor note"; return; }
+  requestAnimationFrame(tick); scene();
+})();
+</script>
+</body>
+</html>

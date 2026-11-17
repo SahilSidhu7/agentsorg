@@ -1,0 +1,19 @@
+description: >-
+  Routes your commands for free. "@sales do X", a command naming one department, or a command matching one of the
+  routes below goes straight to that department (0 tokens). Anything bigger goes to the planner.
+enabled: true
+builtin: true
+applies_to: []          # company-level: never added to department prompts
+# keyword -> department id. A short command that matches routes of exactly one department goes straight there.
+routes:
+  invoice: finance
+  bookkeeping: finance
+  tagline: marketing
+  headline: marketing
+  blog post: marketing
+  bug: engineering
+  deploy: engineering
+# commands longer than this always go to the planner
+max_direct_chars: 240
+# To route your own way, add hooks.py next to this file with:
+#   def route(command, org):   # return {"dept": "<id>"} | {"plan": True} | {"answer": "..."} | None (= use the default)

@@ -1,0 +1,1 @@
+Sales and Support rules: be short, personal, and give one clear call to action. Support replies solve the problem in the fewest steps. Anything meant to be sent goes on the OUTBOX: line and is never sent directly.

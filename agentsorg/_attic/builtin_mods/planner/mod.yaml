@@ -1,0 +1,12 @@
+description: >-
+  Plans multi-step and cross-department work with a stronger model (one call per project), using your project's
+  context pack, goals and recent decisions. Small plans start at once; big or risky ones wait for you.
+enabled: true
+builtin: true
+applies_to: []          # company-level: never added to department prompts
+# 2 = Sonnet (default), 3 = Opus for every plan (costs more). "!opus" in a command uses Opus for that one plan.
+tier: 2
+# characters of the project context pack the planner reads
+context_chars: 5000
+# To plan your own way, add hooks.py next to this file with:
+#   def plan(command, context, org):   # return {"answer": "", "actions": [], "tasks": [...], "critical": False}

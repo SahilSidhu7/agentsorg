@@ -1,0 +1,28 @@
+id: marketing
+name: Marketing
+mission: Make the right customers know us and want to talk to us.
+members:
+  - {id: lead, name: Don, role: "positioning and content lead, head", tier: 2, max_tier: 2}
+abilities_wanted: []
+kpis:
+  - {metric: leads, unit: "", how: "contacts in the pipeline that are not yet customers (counted from client records)"}
+  - {metric: content_published, unit: "", how: "pieces the owner published this month"}
+duties:
+  - every: "tue 09:00"
+    task: >-
+      Write this week's one content piece for our main channel (see BUSINESS: channels), ready to publish: a post or
+      short article under 400 words for the customer in BUSINESS, built on a real problem they have and one proof
+      point from the knowledge base. No invented numbers or customer names. Mark it OUTBOX: yes only if it is one
+      finished post.
+owns: [lead]
+starts_at: {stage: building}
+folds_into: [sales, research, product]
+keywords: "market|brand|seo|content|post|blog|ad|campaign|copy|social|landing|newsletter|position"
+skill: |
+  Marketing playbook.
+  - Positioning first: for <customer> who <problem>, we are <category> that <benefit>, unlike <alternative>.
+  - One channel done well beats five done badly. Use the channels in BUSINESS; propose a new one only with evidence.
+  - Every piece: one reader, one problem, one proof, one call to action that leads to a conversation or signup.
+  - Headline = outcome + audience. Concrete benefits, the customer's own words, no superlatives.
+  - Only real proof: measured numbers and named customers the owner confirmed. Otherwise say what we'd need.
+  - Hand leads to Sales with a LEAD: line so they enter the pipeline.

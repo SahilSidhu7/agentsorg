@@ -1,0 +1,8 @@
+description: Example code mod. Caps each department's tokens per day; past the cap, tasks are refused.
+enabled: false
+applies_to: ["*"]
+system: ""
+files: []
+kb: []
+tiers: {}
+cap_tokens_per_dept: 50000

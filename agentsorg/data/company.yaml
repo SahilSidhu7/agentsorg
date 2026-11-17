@@ -1,0 +1,64 @@
+name: agents.org
+port: 5556
+claude_bin: ""            # leave empty to auto-detect `claude` on PATH
+report_time: "18:00"      # end-of-day reports (local time)
+
+# tier -> Claude Code model alias. Router picks the cheapest tier that fits.
+models:
+  1: haiku
+  2: sonnet
+  3: opus
+
+# reasoning effort per tier: low | medium | high | xhigh | max ("" = Claude Code default).
+# Measured: Haiku spent ~70% of its output on hidden thinking for routine tasks; low halves its output.
+effort:
+  1: low
+
+budget:
+  auto_max_percent: 40      # autonomous work stops at 40% of the 5h/7d subscription window
+  manual_max_percent: 90    # CEO/department commands stop here
+  auto_max_calls: 60        # fallback daily caps if quota can't be read
+  manual_max_calls: 300
+  heartbeat_minutes: 15     # one backlog task per tick
+  quiet_hours: []           # e.g. ["23:00-07:00"], no autonomous work
+  concurrency: 2
+  max_chain_depth: 2        # how many NEXT: follow-ups can chain on their own
+
+# tier = default model, max_tier = highest model the member may escalate to (opus only if 3)
+departments:
+  engineering:
+    name: Engineering
+    mission: Build and maintain the product's software.
+    tools: [Read, Edit, Write, Glob, Grep]   # sandboxed to workspace/engineering
+    max_turns: 8
+    members:
+      lead: {name: Ada, role: Engineering Lead and architect, tier: 2, max_tier: 3}
+      backend: {name: Linus, role: Backend Developer, tier: 2, max_tier: 2}
+      frontend: {name: Grace, role: Frontend Developer, tier: 2, max_tier: 2}
+      qa: {name: Ken, role: QA and test engineer, tier: 1, max_tier: 2}
+  marketing:
+    name: Marketing
+    mission: Grow awareness and demand with sharp positioning and content.
+    members:
+      lead: {name: Don, role: Head of Marketing and positioning, tier: 2, max_tier: 2}
+      copy: {name: Peggy, role: "Copywriter for ads, landing pages and email", tier: 1, max_tier: 2}
+      seo: {name: Rand, role: SEO and content strategist, tier: 1, max_tier: 2}
+  sales:
+    name: Sales & Support
+    mission: Turn interest into customers and keep them happy.
+    members:
+      lead: {name: Jordan, role: Head of Sales, tier: 2, max_tier: 2}
+      sdr: {name: Sam, role: SDR for cold outreach and follow-ups, tier: 1, max_tier: 2}
+      support: {name: Riley, role: Customer support agent, tier: 1, max_tier: 2}
+  research:
+    name: Research
+    mission: Understand the market, customers and competitors.
+    members:
+      lead: {name: Marie, role: Head of Research and strategy, tier: 2, max_tier: 3}
+      analyst: {name: Nate, role: Market analyst, tier: 1, max_tier: 2}
+  finance:
+    name: Finance & Ops
+    mission: Keep the company solvent, planned and running smoothly.
+    members:
+      lead: {name: Warren, role: CFO and operations lead, tier: 2, max_tier: 3}
+      planner: {name: Ruth, role: Budget and operations planner, tier: 1, max_tier: 2}

@@ -1,0 +1,10 @@
+description: >-
+  Turns an approved plan into tasks (0 tokens). Each task gets only what it needs: its department's slice of the
+  project context, its inputs as short summaries with a link to the full deliverable, and the project board.
+enabled: true
+builtin: true
+applies_to: []          # company-level: never added to department prompts
+# a plan with more tasks than this waits for your approval in the Inbox before anything runs
+approve_over_tasks: 4
+# To dispatch your own way, add hooks.py next to this file with:
+#   def dispatch(plan, org):   # return a list of {"dept","member","tier","task","after"} or None

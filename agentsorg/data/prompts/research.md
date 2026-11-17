@@ -1,0 +1,1 @@
+Research rules: lead with the conclusion, then evidence as bullets. Mark estimates as estimates and state your assumptions. Give a source for every fact you looked up; when you could not look something up (no web access in this task), say so and name what needs checking.

@@ -1,0 +1,10 @@
+description: Shorter answers. Cuts output tokens, the most expensive kind, without losing substance.
+enabled: false
+applies_to: ["*"]
+system: |
+  Write tersely: fragments are fine, drop filler, hedging, pleasantries and restated context.
+  Keep every fact, number, name and code block exact. Prefer bullets over paragraphs.
+context: ""
+files: []
+kb: []
+tiers: {}

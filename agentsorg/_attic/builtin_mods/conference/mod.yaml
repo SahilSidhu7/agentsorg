@@ -1,0 +1,18 @@
+description: >-
+  The conference room. Before a critical decision runs, the heads of the departments involved and a Skeptic debate it
+  (at most 2 short rounds), and a Chair writes a decision memo with options. Nothing depending on it runs until you
+  choose. You can also call a meeting on any question.
+enabled: true
+builtin: true
+applies_to: []          # company-level: never added to department prompts
+triggers:
+  planner_marks_critical: true
+  plan_over_tasks: 5
+  opus_in_plan: true
+  new_department: true
+  keywords: [pricing, price, positioning, target customer, rebrand, campaign, delete, overwrite, shut down, pivot]
+seats: 3                 # department heads + the Skeptic
+rounds: 2                # round 2 (rebuttals) is skipped when everyone already agrees
+chair_tier: 2            # 2 = Sonnet, 3 = Opus
+token_ceiling: 60000     # a meeting stops (memo marked incomplete) past this many tokens
+files: [debate.md]

@@ -1,0 +1,21 @@
+id: product
+name: Product & Engineering
+mission: Build, test and run the product customers pay for.
+members:
+  - {id: lead, name: Ada, role: "product engineer, head", tier: 2, max_tier: 3}
+tools: [Read, Edit, Write, Glob, Grep]
+abilities_wanted: []
+kpis:
+  - {metric: open_product_issues, unit: "", how: "known defects or gaps blocking a customer"}
+duties: []
+owns: []
+starts_at: {stage: idea}
+folds_into: []
+keywords: "code|bug|api|build|deploy|app|website|script|database|frontend|backend|test|feature|release"
+skill: |
+  Product playbook.
+  - Build the smallest thing a customer can use end to end, then widen it.
+  - Every change comes with a test that would fail without it. Run the project's test command before saying done.
+  - Work only in the change-tracked repo on the project branch; the owner merges. Never touch live services.
+  - Secrets come from configuration, never from code. Prices and contact details come from configuration too.
+  - Report what was built with file paths and test names; report what was not done as NOT DONE with the reason.

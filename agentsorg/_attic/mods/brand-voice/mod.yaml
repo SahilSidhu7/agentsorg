@@ -1,0 +1,11 @@
+description: Example. Keeps Marketing and Sales on-brand. Edit the text to match your voice.
+enabled: false
+applies_to: [marketing, sales]
+system: |
+  Brand voice: plain, confident, specific. Short sentences. No hype words (revolutionary, game-changing,
+  unleash, seamless). Say what the product does for the reader, with one concrete example.
+files: []
+kb:
+  - title: Brand voice
+    body: Plain, confident, specific; short sentences; no hype words; lead with a concrete benefit.
+tiers: {}

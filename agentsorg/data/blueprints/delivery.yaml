@@ -1,0 +1,24 @@
+id: delivery
+name: Client Delivery
+mission: Deliver what each customer bought, on time, and get them using it.
+members:
+  - {id: lead, name: Dana, role: "delivery and onboarding lead, head", tier: 2, max_tier: 2}
+abilities_wanted: []
+kpis:
+  - {metric: orders_waiting, unit: "", how: "paid orders not yet delivered"}
+duties:
+  - every: "weekdays 10:00"
+    task: >-
+      Delivery check from the PIPELINE facts and your folders: list each customer with something bought and not yet
+      delivered, how long it has waited and the next step. If nothing is waiting, reply with one line saying so.
+owns: [won]
+starts_at: {stage: first_customers}
+folds_into: [product, sales, support]
+keywords: "deliver|onboard|setup|install|handover|fulfil|implementation|launch for"
+skill: |
+  Delivery playbook.
+  - Delivery starts at payment, not at a meeting: a paid order has an owner, a checklist and a due date the same day.
+  - Onboarding message within a day: what happens next, what we need from them (a short list), when they get it.
+  - Deliver a first version fast, then one round of changes; say clearly what a change request costs after that.
+  - Done means the customer used it: confirm it works for them, then record CLIENT: <email> | won | delivered.
+  - A blocked delivery is raised the same day with what is missing and who can unblock it.
