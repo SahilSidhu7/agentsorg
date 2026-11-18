@@ -32,3 +32,4 @@ agentsorg = ["data/*.yaml", "data/blueprints/*.yaml", "data/prompts/*.md", "data
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+norecursedirs = ["_attic"]  # tests for retired modules, kept for reference

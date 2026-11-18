@@ -195,3 +195,12 @@ The budget guard reads your real subscription usage (the 5h and 7d windows, the 
 Edit `company.yaml` to change teams, members, model tiers and budget. Edit `prompts/*.md` and `skills/<dept>/*.md` for behavior. Members can also be added from the UI.
 
 Anything meant for the outside world (emails, posts) goes to the **Outbox** for your approval. Nothing is sent automatically.
+
+## Development
+
+```
+pip install -e ".[dev]"
+pytest
+```
+
+Release (maintainers): `python scripts/release.py 0.8.6 --publish` runs the tests, sets the version everywhere it lives (package, both installers and their site copies, `site/latest.json`), builds the wheel into `site/`, deploys the site, then commits, tags `v0.8.6` and pushes. Leave off `--publish` to build only and check first, then run again with `--publish` to ship. `--dry-run` shows what would change.
